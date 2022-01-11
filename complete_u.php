@@ -3,7 +3,10 @@
   require_once("functions.php");
 
   /* (1)ここにセッション変数の受け渡し処理を追加して下さい  */
-
+    $edit = $_SESSION['edit']; 
+    $name = $_SESSION['name']; 
+    $email = $_SESSION['email']; 
+    $gender = $_SESSION['gender'];	
 
 
 
@@ -19,6 +22,7 @@ try{
     $stmt->bindValue(':id', $edit, PDO::PARAM_INT);         //バインド:プレースホルダーを埋める
     $stmt->execute();                                      //クエリの実行
     $dbh = null;                                           //MySQL接続解除
+    $sql = "UPDATE user SET email = :email, name = :name, gender = :gender, updatedate = NOW() WHERE id = :id";
 }catch (PDOException $e){
     echo($e->getMessage());
     die();
